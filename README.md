@@ -1,8 +1,6 @@
 # WebSocketsRails client port for iOS
 
 Port of JavaScript client provided by https://github.com/websocket-rails/websocket-rails
-[![Version](http://cocoapod-badges.herokuapp.com/v/WebSocketRails-iOS/badge.png)](http://cocoadocs.org/docsets/WebSocketRails-iOS)
-[![Platform](http://cocoapod-badges.herokuapp.com/p/WebSocketRails-iOS/badge.png)](http://cocoadocs.org/docsets/WebSocketRails-iOS)
 
 Built on top of SocketRocket
 
