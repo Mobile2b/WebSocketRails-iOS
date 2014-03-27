@@ -1,0 +1,3 @@
+pod "WebSocketRails-iOS", :path => "../WebSocketRails-iOS.podspec"
+xcodeproj 'WebSocketRails-iOS-Example.xcodeproj'
+platform :ios, '7.0'

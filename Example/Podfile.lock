@@ -1,0 +1,17 @@
+PODS:
+  - SocketRocket (0.3.1-beta2)
+  - WebSocketRails-iOS (0.1.0):
+    - SocketRocket (= 0.3.1-beta2)
+
+DEPENDENCIES:
+  - WebSocketRails-iOS (from `../WebSocketRails-iOS.podspec`)
+
+EXTERNAL SOURCES:
+  WebSocketRails-iOS:
+    :path: ../WebSocketRails-iOS.podspec
+
+SPEC CHECKSUMS:
+  SocketRocket: 7ac946bcce46287a791dfff3c1f8daa692821dae
+  WebSocketRails-iOS: b72476a06616f9b07f73e62b19d81115d719e123
+
+COCOAPODS: 0.29.0

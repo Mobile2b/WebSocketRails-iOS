@@ -26,40 +26,8 @@
 		933667D2186120E9006BD134 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 933667D1186120E9006BD134 /* Images.xcassets */; };
 		933667EB18612152006BD134 /* libWebSocketRails-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 933666B218610E5F006BD134 /* libWebSocketRails-iOS.a */; };
 		933667ED18612160006BD134 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 933667821861200A006BD134 /* CoreGraphics.framework */; };
-		933667EE1861217B006BD134 /* libSocketRocket.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9336676E1861184F006BD134 /* libSocketRocket.a */; };
 		933667EF186121CB006BD134 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9336676418611840006BD134 /* libicucore.dylib */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		9336676D1861184F006BD134 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 933667661861184E006BD134 /* SocketRocket.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = F6B2082D1450F597009315AF;
-			remoteInfo = SocketRocket;
-		};
-		9336676F1861184F006BD134 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 933667661861184E006BD134 /* SocketRocket.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = F668C880153E91210044DBAC;
-			remoteInfo = SocketRocketOSX;
-		};
-		933667711861184F006BD134 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 933667661861184E006BD134 /* SocketRocket.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = F6BDA802145900D200FE3253;
-			remoteInfo = SRWebSocketTests;
-		};
-		933667731861184F006BD134 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 933667661861184E006BD134 /* SocketRocket.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = F62417E314D52F3C003CE997;
-			remoteInfo = TestChat;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		933666B018610E5F006BD134 /* CopyFiles */ = {
@@ -74,6 +42,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		82A3649D18E48CF4008F6AEE /* WebSocketRails-iOS.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "WebSocketRails-iOS.podspec"; sourceTree = "<group>"; };
 		933666B218610E5F006BD134 /* libWebSocketRails-iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libWebSocketRails-iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		933666B518610E5F006BD134 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		933666C318610E5F006BD134 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -90,7 +59,6 @@
 		933667601861182C006BD134 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		9336676218611831006BD134 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		9336676418611840006BD134 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
-		933667661861184E006BD134 /* SocketRocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SocketRocket.xcodeproj; path = SocketRocket/SocketRocket.xcodeproj; sourceTree = "<group>"; };
 		933667821861200A006BD134 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		933667B8186120E9006BD134 /* WebSocketRailsTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WebSocketRailsTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		933667BE186120E9006BD134 /* WebSocketRailsTest-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "WebSocketRailsTest-Info.plist"; sourceTree = "<group>"; };
@@ -123,7 +91,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				933667EF186121CB006BD134 /* libicucore.dylib in Frameworks */,
-				933667EE1861217B006BD134 /* libSocketRocket.a in Frameworks */,
 				933667ED18612160006BD134 /* CoreGraphics.framework in Frameworks */,
 				933667EB18612152006BD134 /* libWebSocketRails-iOS.a in Frameworks */,
 				933667BB186120E9006BD134 /* UIKit.framework in Frameworks */,
@@ -137,7 +104,7 @@
 		933666A918610E5F006BD134 = {
 			isa = PBXGroup;
 			children = (
-				933667661861184E006BD134 /* SocketRocket.xcodeproj */,
+				82A3649D18E48CF4008F6AEE /* WebSocketRails-iOS.podspec */,
 				933666B718610E5F006BD134 /* WebSocketRails-iOS */,
 				933667BC186120E9006BD134 /* WebSocketRailsTest */,
 				933666B418610E5F006BD134 /* Frameworks */,
@@ -182,17 +149,6 @@
 				9336675B186117F9006BD134 /* WebSocketRailsTypes.h */,
 			);
 			path = "WebSocketRails-iOS";
-			sourceTree = "<group>";
-		};
-		933667671861184E006BD134 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				9336676E1861184F006BD134 /* libSocketRocket.a */,
-				933667701861184F006BD134 /* SocketRocket.framework */,
-				933667721861184F006BD134 /* SRWebSocketTests.octest */,
-				933667741861184F006BD134 /* TestChat.app */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		933667BC186120E9006BD134 /* WebSocketRailsTest */ = {
@@ -278,12 +234,6 @@
 			mainGroup = 933666A918610E5F006BD134;
 			productRefGroup = 933666B318610E5F006BD134 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 933667671861184E006BD134 /* Products */;
-					ProjectRef = 933667661861184E006BD134 /* SocketRocket.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				933666B118610E5F006BD134 /* WebSocketRails-iOS */,
@@ -291,37 +241,6 @@
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		9336676E1861184F006BD134 /* libSocketRocket.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libSocketRocket.a;
-			remoteRef = 9336676D1861184F006BD134 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		933667701861184F006BD134 /* SocketRocket.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = SocketRocket.framework;
-			remoteRef = 9336676F1861184F006BD134 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		933667721861184F006BD134 /* SRWebSocketTests.octest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = SRWebSocketTests.octest;
-			remoteRef = 933667711861184F006BD134 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		933667741861184F006BD134 /* TestChat.app */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
-			path = TestChat.app;
-			remoteRef = 933667731861184F006BD134 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		933667B6186120E9006BD134 /* Resources */ = {
@@ -575,6 +494,7 @@
 				933667E7186120EA006BD134 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
