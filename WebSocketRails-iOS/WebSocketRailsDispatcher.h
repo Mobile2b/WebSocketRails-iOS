@@ -32,8 +32,9 @@ typedef NS_ENUM(NSUInteger, WSRDispatcherState) {
 
 - (void)dispatch:(WebSocketRailsEvent *)event;
 - (void)newMessage:(NSArray *)data;
+
 /**
- *  Use this method so register add a callback for the specified event name. The callback will be called every time an event with this name occurs, which is not a channel-specific event.
+ *  Use this method to add a callback for the specified event name. The callback will be called every time an event with this name occurs, which is not a channel-specific event.
  *
  *  @param eventName the name of the event for which the callback should be registered. See WSRSpecialEventNames for some special connection-related cases.
  *  @param callback  the callback to call whenever such an event occurs

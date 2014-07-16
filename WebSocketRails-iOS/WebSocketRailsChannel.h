@@ -21,7 +21,14 @@
 
 - (id)initWithName:(NSString *)name dispatcher:(WebSocketRailsDispatcher *)dispatcher private:(BOOL)private;
 
-- (void)bind:(NSString *)eventName callback:(EventCompletionBlock)callback;
+/**
+ *  Use this method to add a callback for the specified event name. The callback will be called every time an event with this name occurs in this channel.
+ *
+ *  @param eventName the name of the event for which the callback should be registered.
+ *  @param callback  the callback to call whenever such an event occurs
+ */
+- (void)bindToEventWithName:(NSString *)eventName callback:(EventCompletionBlock)callback;
+
 - (void)dispatch:(NSString *)eventName message:(id)message;
 - (void)destroy;
 

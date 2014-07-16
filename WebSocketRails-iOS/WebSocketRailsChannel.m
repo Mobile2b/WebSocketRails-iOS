@@ -50,7 +50,7 @@ NSString *const WSRChannelSubscriptionMessageDataChannelKey = @"channel";
     return self;
 }
 
-- (void)bind:(NSString *)eventName callback:(EventCompletionBlock)callback
+- (void)bindToEventWithName:(NSString *)eventName callback:(EventCompletionBlock)callback;
 {
     if (!_callbacks[eventName])
         _callbacks[eventName] = [NSMutableArray array];
