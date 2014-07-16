@@ -33,7 +33,7 @@ end
 desc "Release a new version of the Pod (append repo=name to push to a private spec repo)"
 task :release do
   # Allow override of spec repo name using `repo=private` after task name
-  repo = ENV["repo"] || "master"
+  repo = ENV["repo"] || "CocoaPods-Mobile2b-Specs"
 
   puts "* Running version"
   sh "rake version"
@@ -64,7 +64,7 @@ task :release do
   sh "git tag -a #{spec_version} -m 'Release #{spec_version}'"
   sh "git push origin master"
   sh "git push origin --tags"
-  sh "pod push #{repo} #{podspec_path}"
+  sh "pod repo push #{repo} #{podspec_path}"
 end
 
 # @return [Pod::Version] The version as reported by the Podspec.
@@ -88,7 +88,7 @@ def remote_spec_version
   end
 end
 
-# @return [Bool] If the remote repository has a copy of the podpesc file or not.
+# @return [Bool] If the remote repository has a copy of the podspec file or not.
 #
 def spec_file_exist_on_remote?
   test_condition = `if git rev-parse --verify --quiet origin/master:#{podspec_path} >/dev/null;
