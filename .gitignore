@@ -17,3 +17,5 @@ DerivedData/
 xcuserdata
 *.xccheckout
 */Pods/
+
+/Pods/

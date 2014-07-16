@@ -27,6 +27,7 @@
 		933667EB18612152006BD134 /* libWebSocketRails-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 933666B218610E5F006BD134 /* libWebSocketRails-iOS.a */; };
 		933667ED18612160006BD134 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 933667821861200A006BD134 /* CoreGraphics.framework */; };
 		933667EF186121CB006BD134 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9336676418611840006BD134 /* libicucore.dylib */; };
+		D9C450906418425BA8A99D23 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 628DA8DA78694B9BAB8496B2 /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -42,6 +43,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		628DA8DA78694B9BAB8496B2 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		82A3649D18E48CF4008F6AEE /* WebSocketRails-iOS.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "WebSocketRails-iOS.podspec"; sourceTree = "<group>"; };
 		933666B218610E5F006BD134 /* libWebSocketRails-iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libWebSocketRails-iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		933666B518610E5F006BD134 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -72,6 +74,7 @@
 		933667CE186120E9006BD134 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		933667CF186120E9006BD134 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		933667D1186120E9006BD134 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		B931FC8DB3F04A1082060B8E /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +86,7 @@
 				9336676318611831006BD134 /* Security.framework in Frameworks */,
 				933667611861182C006BD134 /* CFNetwork.framework in Frameworks */,
 				933666B618610E5F006BD134 /* Foundation.framework in Frameworks */,
+				D9C450906418425BA8A99D23 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -109,6 +113,7 @@
 				933667BC186120E9006BD134 /* WebSocketRailsTest */,
 				933666B418610E5F006BD134 /* Frameworks */,
 				933666B318610E5F006BD134 /* Products */,
+				B931FC8DB3F04A1082060B8E /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -131,6 +136,7 @@
 				933666C318610E5F006BD134 /* XCTest.framework */,
 				933666C618610E5F006BD134 /* UIKit.framework */,
 				933667821861200A006BD134 /* CoreGraphics.framework */,
+				628DA8DA78694B9BAB8496B2 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -184,9 +190,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 933666D518610E5F006BD134 /* Build configuration list for PBXNativeTarget "WebSocketRails-iOS" */;
 			buildPhases = (
+				BD343AB966794C408E9E5A83 /* Check Pods Manifest.lock */,
 				933666AE18610E5F006BD134 /* Sources */,
 				933666AF18610E5F006BD134 /* Frameworks */,
 				933666B018610E5F006BD134 /* CopyFiles */,
+				5B8075F0B80243BB9708126F /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -220,7 +228,7 @@
 		933666AA18610E5F006BD134 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Evgeny Lavrik";
 			};
 			buildConfigurationList = 933666AD18610E5F006BD134 /* Build configuration list for PBXProject "WebSocketRails-iOS" */;
@@ -255,6 +263,39 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		5B8075F0B80243BB9708126F /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BD343AB966794C408E9E5A83 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		933666AE18610E5F006BD134 /* Sources */ = {
@@ -312,7 +353,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -347,7 +387,6 @@
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_LDFLAGS = "-all_load";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -356,7 +395,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -384,7 +422,6 @@
 					"SocketRocket/**",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				OTHER_LDFLAGS = "-all_load";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -392,11 +429,11 @@
 		};
 		933666D618610E5F006BD134 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B931FC8DB3F04A1082060B8E /* Pods.xcconfig */;
 			buildSettings = {
 				DSTROOT = /tmp/WebSocketRails_iOS.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
-				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -404,11 +441,11 @@
 		};
 		933666D718610E5F006BD134 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B931FC8DB3F04A1082060B8E /* Pods.xcconfig */;
 			buildSettings = {
 				DSTROOT = /tmp/WebSocketRails_iOS.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
-				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -417,7 +454,6 @@
 		933667E6186120EA006BD134 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -432,10 +468,6 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "WebSocketRailsTest/WebSocketRailsTest-Info.plist";
-				OTHER_LDFLAGS = (
-					"-ObjC",
-					"-all_load",
-				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
@@ -445,7 +477,6 @@
 		933667E7186120EA006BD134 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -456,10 +487,6 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "WebSocketRailsTest/WebSocketRailsTest-Prefix.pch";
 				INFOPLIST_FILE = "WebSocketRailsTest/WebSocketRailsTest-Info.plist";
-				OTHER_LDFLAGS = (
-					"-ObjC",
-					"-all_load",
-				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
