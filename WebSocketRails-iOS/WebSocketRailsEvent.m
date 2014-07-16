@@ -8,6 +8,24 @@
 
 #import "WebSocketRailsEvent.h"
 
+const struct WSRSpecialEventNames WSRSpecialEventNames = {
+    .ConnectionClosed = @"connection_closed",
+    .ConnectionError = @"connection_error",
+    .ClientConnected = @"client_connected",
+    .WebSocketRailsPong = @"websocket_rails.pong",
+    .WebSocketRailsPing = @"websocket_rails.ping",
+    .WebSocketRailsSubscribe = @"websocket_rails.subscribe",
+    .WebSocketRailsSubscribePrivate = @"websocket_rails.subscribe_private",
+    .WebSocketRailsUnscubscribe = @"websocket_rails.unsubscribe"
+};
+
+const struct WSREventAttributeKeys WSREventAttributeKeys = {
+    .id = @"id",
+    .channel = @"channel",
+    .data = @"data",
+    .success = @"success"
+};
+
 @interface WebSocketRailsEvent()
 
 @property (nonatomic, copy) EventCompletionBlock successCallback;
@@ -26,26 +44,26 @@
         
         if (_attr)
         {
-            if (_attr[@"id"] && _attr[@"id"] != [NSNull null])
-                _id = _attr[@"id"];
+            if (_attr[WSREventAttributeKeys.id] && _attr[WSREventAttributeKeys.id] != [NSNull null])
+                _id = _attr[WSREventAttributeKeys.id];
             else
                 _id = [NSNumber numberWithInt:rand()];
             
-            if (_attr[@"channel"] && _attr[@"channel"] != [NSNull null])
-                _channel = _attr[@"channel"];
+            if (_attr[WSREventAttributeKeys.channel] && _attr[WSREventAttributeKeys.channel] != [NSNull null])
+                _channel = _attr[WSREventAttributeKeys.channel];
             
-            if (_attr[@"data"] && _attr[@"data"] != [NSNull null])
-                _data = _attr[@"data"];
+            if (_attr[WSREventAttributeKeys.data] && _attr[WSREventAttributeKeys.data] != [NSNull null])
+                _data = _attr[WSREventAttributeKeys.data];
             
             if ([data count] > 2 && data[2] && data[2] != [NSNull null])
                 _connectionId = data[2];
             else
                 _connectionId = @0;
             
-            if (_attr[@"success"] && _attr[@"success"] != [NSNull null])
+            if (_attr[WSREventAttributeKeys.success] && _attr[WSREventAttributeKeys.success] != [NSNull null])
             {
                 _result = YES;
-                _success = (BOOL) _attr[@"success"];
+                _success = (BOOL) _attr[WSREventAttributeKeys.success];
             }
         }
         
@@ -71,7 +89,7 @@
 
 - (BOOL)isPing
 {
-    return [_name isEqualToString:@"websocket_rails.ping"];
+    return [_name isEqualToString:WSRSpecialEventNames.WebSocketRailsPing];
 }
 
 - (NSString *)serialize
@@ -86,9 +104,9 @@
 
 - (id)attributes
 {
-    return @{@"id": _id ? _id : [NSNull null],
-             @"channel": _channel ? _channel : [NSNull null],
-             @"data": _data ? _data : [NSNull null]
+    return @{WSREventAttributeKeys.id: _id ?: [NSNull null],
+             WSREventAttributeKeys.channel: _channel ?: [NSNull null],
+             WSREventAttributeKeys.data: _data ?: [NSNull null]
              };
 }
 

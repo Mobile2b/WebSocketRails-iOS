@@ -37,7 +37,7 @@
 
 - (void)trigger:(WebSocketRailsEvent *)event
 {
-    if (![_dispatcher.state isEqualToString:@"connected"])
+    if (_dispatcher.state != WSRDispatcherStateConnected)
         [_message_queue addObject:event];
     else
         [_webSocket send:[event serialize]];
@@ -68,15 +68,15 @@
 
 - (void)webSocket:(SRWebSocket *)webSocket didCloseWithCode:(NSInteger)code reason:(NSString *)reason wasClean:(BOOL)wasClean
 {
-    WebSocketRailsEvent *closeEvent = [WebSocketRailsEvent.alloc initWithData:@[@"connection_closed", @{}]];
-    _dispatcher.state = @"disconnected";
+    WebSocketRailsEvent *closeEvent = [WebSocketRailsEvent.alloc initWithData:@[WSRSpecialEventNames.ConnectionClosed, @{}]];
+    _dispatcher.state = WSRDispatcherStateDisconnected;
     [_dispatcher dispatch:closeEvent];
 }
 
 - (void)webSocket:(SRWebSocket *)webSocket didFailWithError:(NSError *)error
 {
-    WebSocketRailsEvent *closeEvent = [WebSocketRailsEvent.alloc initWithData:@[@"connection_error", @{}]];
-    _dispatcher.state = @"disconnected";
+    WebSocketRailsEvent *closeEvent = [WebSocketRailsEvent.alloc initWithData:@[WSRSpecialEventNames.ConnectionError, @{}]];
+    _dispatcher.state = WSRDispatcherStateDisconnected;
     [_dispatcher dispatch:closeEvent];
 }
 

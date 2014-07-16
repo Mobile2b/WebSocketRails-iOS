@@ -9,6 +9,8 @@
 #import "WebSocketRailsDispatcher.h"
 #import "WebSocketRailsConnection.h"
 
+NSString *const WSRConnectionIDMessageKey = @"connectionId";
+
 @interface WebSocketRailsDispatcher()
 
 @property (nonatomic, strong) NSMutableDictionary *queue;
@@ -24,7 +26,7 @@
     self = [super init];
     if (self) {
         _url = url;
-        _state = @"connecting";
+        _state = WSRDispatcherStateConnecting;
         _channels = [NSMutableDictionary dictionary];
         _queue = [NSMutableDictionary dictionary];
         _callbacks = [NSMutableDictionary dictionary];
@@ -56,16 +58,16 @@
             [self dispatch:event];
         }
         
-        if ([_state isEqualToString:@"connecting"] && [event.name isEqualToString:@"client_connected"])
+        if ((_state == WSRDispatcherStateConnecting) && [event.name isEqualToString:WSRSpecialEventNames.ClientConnected])
             [self connectionEstablished:event.data];
     }
 }
 
 - (void)connectionEstablished:(id)data
 {
-    _state = @"connected";
-    _connectionId = data[@"connectionId"] ? data[@"connectionId"] : [NSNull null];
-    [_connection flushQueue:data[@"connectionId"]];
+    _state = WSRDispatcherStateConnected;
+    _connectionId = data[WSRConnectionIDMessageKey] ?: [NSNull null];
+    [_connection flushQueue:_connectionId];
 }
 
 - (void)bind:(NSString *)eventName callback:(EventCompletionBlock)callback
@@ -132,7 +134,7 @@
 
 - (void)pong
 {
-    WebSocketRailsEvent *pong = [WebSocketRailsEvent.alloc initWithData:@[@"websocket_rails.pong", @{}, _connectionId ? _connectionId : [NSNull null]]];
+    WebSocketRailsEvent *pong = [WebSocketRailsEvent.alloc initWithData:@[WSRSpecialEventNames.WebSocketRailsPong, @{}, _connectionId ? _connectionId : [NSNull null]]];
     [_connection trigger:pong];
 }
 

@@ -9,6 +9,24 @@
 #import <Foundation/Foundation.h>
 #import "WebSocketRailsTypes.h"
 
+extern const struct WSRSpecialEventNames {
+    __unsafe_unretained NSString *ConnectionClosed;
+    __unsafe_unretained NSString *ConnectionError;
+    __unsafe_unretained NSString *ClientConnected;
+    __unsafe_unretained NSString *WebSocketRailsPong;
+    __unsafe_unretained NSString *WebSocketRailsPing;
+    __unsafe_unretained NSString *WebSocketRailsSubscribe;
+    __unsafe_unretained NSString *WebSocketRailsSubscribePrivate;
+    __unsafe_unretained NSString *WebSocketRailsUnscubscribe;
+} WSRSpecialEventNames;
+
+extern const struct WSREventAttributeKeys {
+    __unsafe_unretained NSString *id;
+    __unsafe_unretained NSString *channel;
+    __unsafe_unretained NSString *data;
+    __unsafe_unretained NSString *success;
+} WSREventAttributeKeys;
+
 @interface WebSocketRailsEvent : NSObject
 
 @property (nonatomic, strong) NSString *name;

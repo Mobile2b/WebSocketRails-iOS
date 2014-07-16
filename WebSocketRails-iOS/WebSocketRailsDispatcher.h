@@ -15,9 +15,15 @@
 
 @class WebSocketRailsChannel;
 
+typedef NS_ENUM(NSUInteger, WSRDispatcherState) {
+    WSRDispatcherStateConnected,
+    WSRDispatcherStateConnecting,
+    WSRDispatcherStateDisconnected
+};
+
 @interface WebSocketRailsDispatcher : NSObject
 
-@property (nonatomic, strong) NSString *state;
+@property (assign) WSRDispatcherState state;
 @property (nonatomic, strong) NSURL *url;
 @property (nonatomic, strong) NSMutableDictionary *channels;
 @property (nonatomic, strong) NSNumber *connectionId;
