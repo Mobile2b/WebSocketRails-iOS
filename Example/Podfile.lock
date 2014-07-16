@@ -11,7 +11,7 @@ EXTERNAL SOURCES:
     :path: ../WebSocketRails-iOS.podspec
 
 SPEC CHECKSUMS:
-  SocketRocket: 7ac946bcce46287a791dfff3c1f8daa692821dae
+  SocketRocket: 79a68ae186063c65e1fe6f638b1ae2927aa5f304
   WebSocketRails-iOS: b72476a06616f9b07f73e62b19d81115d719e123
 
-COCOAPODS: 0.29.0
+COCOAPODS: 0.33.1
