@@ -15,18 +15,6 @@
 		933667611861182C006BD134 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 933667601861182C006BD134 /* CFNetwork.framework */; };
 		9336676318611831006BD134 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9336676218611831006BD134 /* Security.framework */; };
 		9336676518611840006BD134 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9336676418611840006BD134 /* libicucore.dylib */; };
-		933667B9186120E9006BD134 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 933666B518610E5F006BD134 /* Foundation.framework */; };
-		933667BB186120E9006BD134 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 933666C618610E5F006BD134 /* UIKit.framework */; };
-		933667C1186120E9006BD134 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 933667BF186120E9006BD134 /* InfoPlist.strings */; };
-		933667C3186120E9006BD134 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 933667C2186120E9006BD134 /* main.m */; };
-		933667C7186120E9006BD134 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 933667C6186120E9006BD134 /* AppDelegate.m */; };
-		933667CA186120E9006BD134 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 933667C8186120E9006BD134 /* Main_iPhone.storyboard */; };
-		933667CD186120E9006BD134 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 933667CB186120E9006BD134 /* Main_iPad.storyboard */; };
-		933667D0186120E9006BD134 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 933667CF186120E9006BD134 /* ViewController.m */; };
-		933667D2186120E9006BD134 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 933667D1186120E9006BD134 /* Images.xcassets */; };
-		933667EB18612152006BD134 /* libWebSocketRails-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 933666B218610E5F006BD134 /* libWebSocketRails-iOS.a */; };
-		933667ED18612160006BD134 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 933667821861200A006BD134 /* CoreGraphics.framework */; };
-		933667EF186121CB006BD134 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9336676418611840006BD134 /* libicucore.dylib */; };
 		D9C450906418425BA8A99D23 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 628DA8DA78694B9BAB8496B2 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -62,18 +50,6 @@
 		9336676218611831006BD134 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		9336676418611840006BD134 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
 		933667821861200A006BD134 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		933667B8186120E9006BD134 /* WebSocketRailsTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WebSocketRailsTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		933667BE186120E9006BD134 /* WebSocketRailsTest-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "WebSocketRailsTest-Info.plist"; sourceTree = "<group>"; };
-		933667C0186120E9006BD134 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		933667C2186120E9006BD134 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		933667C4186120E9006BD134 /* WebSocketRailsTest-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WebSocketRailsTest-Prefix.pch"; sourceTree = "<group>"; };
-		933667C5186120E9006BD134 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		933667C6186120E9006BD134 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		933667C9186120E9006BD134 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
-		933667CC186120E9006BD134 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
-		933667CE186120E9006BD134 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		933667CF186120E9006BD134 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		933667D1186120E9006BD134 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		B931FC8DB3F04A1082060B8E /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -90,18 +66,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		933667B5186120E9006BD134 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				933667EF186121CB006BD134 /* libicucore.dylib in Frameworks */,
-				933667ED18612160006BD134 /* CoreGraphics.framework in Frameworks */,
-				933667EB18612152006BD134 /* libWebSocketRails-iOS.a in Frameworks */,
-				933667BB186120E9006BD134 /* UIKit.framework in Frameworks */,
-				933667B9186120E9006BD134 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -110,7 +74,6 @@
 			children = (
 				82A3649D18E48CF4008F6AEE /* WebSocketRails-iOS.podspec */,
 				933666B718610E5F006BD134 /* WebSocketRails-iOS */,
-				933667BC186120E9006BD134 /* WebSocketRailsTest */,
 				933666B418610E5F006BD134 /* Frameworks */,
 				933666B318610E5F006BD134 /* Products */,
 				B931FC8DB3F04A1082060B8E /* Pods.xcconfig */,
@@ -121,7 +84,6 @@
 			isa = PBXGroup;
 			children = (
 				933666B218610E5F006BD134 /* libWebSocketRails-iOS.a */,
-				933667B8186120E9006BD134 /* WebSocketRailsTest.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -157,32 +119,6 @@
 			path = "WebSocketRails-iOS";
 			sourceTree = "<group>";
 		};
-		933667BC186120E9006BD134 /* WebSocketRailsTest */ = {
-			isa = PBXGroup;
-			children = (
-				933667C5186120E9006BD134 /* AppDelegate.h */,
-				933667C6186120E9006BD134 /* AppDelegate.m */,
-				933667C8186120E9006BD134 /* Main_iPhone.storyboard */,
-				933667CB186120E9006BD134 /* Main_iPad.storyboard */,
-				933667CE186120E9006BD134 /* ViewController.h */,
-				933667CF186120E9006BD134 /* ViewController.m */,
-				933667D1186120E9006BD134 /* Images.xcassets */,
-				933667BD186120E9006BD134 /* Supporting Files */,
-			);
-			path = WebSocketRailsTest;
-			sourceTree = "<group>";
-		};
-		933667BD186120E9006BD134 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				933667BE186120E9006BD134 /* WebSocketRailsTest-Info.plist */,
-				933667BF186120E9006BD134 /* InfoPlist.strings */,
-				933667C2186120E9006BD134 /* main.m */,
-				933667C4186120E9006BD134 /* WebSocketRailsTest-Prefix.pch */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -204,23 +140,6 @@
 			productName = "WebSocketRails-iOS";
 			productReference = 933666B218610E5F006BD134 /* libWebSocketRails-iOS.a */;
 			productType = "com.apple.product-type.library.static";
-		};
-		933667B7186120E9006BD134 /* WebSocketRailsTest */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 933667E5186120EA006BD134 /* Build configuration list for PBXNativeTarget "WebSocketRailsTest" */;
-			buildPhases = (
-				933667B4186120E9006BD134 /* Sources */,
-				933667B5186120E9006BD134 /* Frameworks */,
-				933667B6186120E9006BD134 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = WebSocketRailsTest;
-			productName = WebSocketRailsTest;
-			productReference = 933667B8186120E9006BD134 /* WebSocketRailsTest.app */;
-			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
@@ -245,24 +164,9 @@
 			projectRoot = "";
 			targets = (
 				933666B118610E5F006BD134 /* WebSocketRails-iOS */,
-				933667B7186120E9006BD134 /* WebSocketRailsTest */,
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXResourcesBuildPhase section */
-		933667B6186120E9006BD134 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				933667CD186120E9006BD134 /* Main_iPad.storyboard in Resources */,
-				933667D2186120E9006BD134 /* Images.xcassets in Resources */,
-				933667CA186120E9006BD134 /* Main_iPhone.storyboard in Resources */,
-				933667C1186120E9006BD134 /* InfoPlist.strings in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
 		5B8075F0B80243BB9708126F /* Copy Pods Resources */ = {
@@ -309,44 +213,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		933667B4186120E9006BD134 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				933667D0186120E9006BD134 /* ViewController.m in Sources */,
-				933667C7186120E9006BD134 /* AppDelegate.m in Sources */,
-				933667C3186120E9006BD134 /* main.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		933667BF186120E9006BD134 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				933667C0186120E9006BD134 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		933667C8186120E9006BD134 /* Main_iPhone.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				933667C9186120E9006BD134 /* Base */,
-			);
-			name = Main_iPhone.storyboard;
-			sourceTree = "<group>";
-		};
-		933667CB186120E9006BD134 /* Main_iPad.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				933667CC186120E9006BD134 /* Base */,
-			);
-			name = Main_iPad.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		933666D318610E5F006BD134 /* Debug */ = {
@@ -451,48 +318,6 @@
 			};
 			name = Release;
 		};
-		933667E6186120EA006BD134 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "WebSocketRailsTest/WebSocketRailsTest-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "WebSocketRailsTest/WebSocketRailsTest-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				WRAPPER_EXTENSION = app;
-			};
-			name = Debug;
-		};
-		933667E7186120EA006BD134 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "WebSocketRailsTest/WebSocketRailsTest-Prefix.pch";
-				INFOPLIST_FILE = "WebSocketRailsTest/WebSocketRailsTest-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				WRAPPER_EXTENSION = app;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -510,15 +335,6 @@
 			buildConfigurations = (
 				933666D618610E5F006BD134 /* Debug */,
 				933666D718610E5F006BD134 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		933667E5186120EA006BD134 /* Build configuration list for PBXNativeTarget "WebSocketRailsTest" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				933667E6186120EA006BD134 /* Debug */,
-				933667E7186120EA006BD134 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
