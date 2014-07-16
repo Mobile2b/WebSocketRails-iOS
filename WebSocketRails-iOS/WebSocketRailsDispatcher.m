@@ -70,7 +70,7 @@ NSString *const WSRConnectionIDMessageKey = @"connectionId";
     [_connection flushQueue:_connectionId];
 }
 
-- (void)bind:(NSString *)eventName callback:(EventCompletionBlock)callback
+- (void)bindToEventWithName:(NSString *)eventName callback:(EventCompletionBlock)callback
 {
     if (!_callbacks[eventName])
         _callbacks[eventName] = [NSMutableArray array];
@@ -105,7 +105,7 @@ NSString *const WSRConnectionIDMessageKey = @"connectionId";
     }
 }
 
-- (WebSocketRailsChannel *)subscribe:(NSString *)channelName
+- (WebSocketRailsChannel *)subscribeToChannelWithName:(NSString *)channelName
 {
     if (_channels[channelName])
         return _channels[channelName];
@@ -115,7 +115,7 @@ NSString *const WSRConnectionIDMessageKey = @"connectionId";
     return channel;
 }
 
-- (void)unsubscribe:(NSString *)channelName
+- (void)unsubscribeFromChannelWithName:(NSString *)channelName
 {
     if (!_channels[channelName])
         return;
