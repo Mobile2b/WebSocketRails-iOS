@@ -7,12 +7,35 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "WebSocketRailsDispatcher.h"
-#import "WebSocketRailsEvent.h"
+#import <SRWebSocket.h>
+@class WebSocketRailsEvent;
+@class WebSocketRailsConnection;
+
+typedef NS_ENUM(NSUInteger, WSRDispatcherState) {
+    WSRDispatcherStateConnected,
+    WSRDispatcherStateConnecting,
+    WSRDispatcherStateDisconnected
+};
+
+@protocol WebSocketRailsConnectionDelegate <NSObject>
+
+@property (readonly) WSRDispatcherState state;
+
+- (void)connection:(WebSocketRailsConnection *)connection didReceiveMessages:(NSDictionary *)messages;
+
+@optional
+
+- (void)connectionDidOpen:(WebSocketRailsConnection *)connection;
+- (void)connection:(WebSocketRailsConnection *)connection didFailWithError:(NSError *)error;
+- (void)connection:(WebSocketRailsConnection *)connection didCloseWithCode:(NSInteger)code reason:(NSString *)reason wasClean:(BOOL)wasClean;
+
+@end
 
 @interface WebSocketRailsConnection : NSObject
 
-- (id)initWithUrl:(NSURL *)url dispatcher:(WebSocketRailsDispatcher *)dispatcher;
+@property (weak) id<WebSocketRailsConnectionDelegate> delegate;
+
+- (id)initWithUrl:(NSURL *)url delegate:(id<WebSocketRailsConnectionDelegate>)delegate;
 
 - (void)trigger:(WebSocketRailsEvent *)event;
 - (void)flushQueue:(NSNumber *)id;

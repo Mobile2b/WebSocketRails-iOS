@@ -10,8 +10,6 @@
 #import "WebSocketRailsTypes.h"
 
 extern const struct WSRSpecialEventNames {
-    __unsafe_unretained NSString *ConnectionClosed;
-    __unsafe_unretained NSString *ConnectionError;
     __unsafe_unretained NSString *ClientConnected;
     __unsafe_unretained NSString *WebSocketRailsPong;
     __unsafe_unretained NSString *WebSocketRailsPing;

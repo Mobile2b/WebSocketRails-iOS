@@ -7,12 +7,11 @@
 //
 
 #import "WebSocketRailsConnection.h"
-#import "SRWebSocket.h"
+#import "WebSocketRailsEvent.h"
 
 @interface WebSocketRailsConnection() <SRWebSocketDelegate>
 
 @property (nonatomic, strong) NSURL *url;
-@property (nonatomic, strong) WebSocketRailsDispatcher *dispatcher;
 @property (nonatomic, strong) NSMutableArray *message_queue;
 @property (nonatomic, strong) SRWebSocket *webSocket;
 
@@ -20,12 +19,12 @@
 
 @implementation WebSocketRailsConnection
 
-- (id)initWithUrl:(NSURL *)url dispatcher:(WebSocketRailsDispatcher *)dispatcher
+- (id)initWithUrl:(NSURL *)url delegate:(id<WebSocketRailsConnectionDelegate>)delegate;
 {
     self = [super init];
     if (self) {
         _url = url;
-        _dispatcher = dispatcher;
+        _delegate = delegate;
         _message_queue = [NSMutableArray array];
         
         _webSocket = [SRWebSocket.alloc initWithURL:_url];
@@ -37,18 +36,29 @@
 
 - (void)trigger:(WebSocketRailsEvent *)event
 {
-    if (_dispatcher.state != WSRDispatcherStateConnected)
-        [_message_queue addObject:event];
+    if (_delegate.state != WSRDispatcherStateConnected)
+    {
+        @synchronized(self)
+        {
+            [_message_queue addObject:event];
+        }
+    }
     else
+    {
         [_webSocket send:[event serialize]];
+    }
 }
 
 - (void)flushQueue:(NSNumber *)id
 {
-    for (WebSocketRailsEvent *event in _message_queue)
+    @synchronized(self)
     {
-        NSString *serializedEvent = [event serialize];
-        [_webSocket send:serializedEvent];
+        for (WebSocketRailsEvent *event in _message_queue)
+        {
+            NSString *serializedEvent = [event serialize];
+            [_webSocket send:serializedEvent];
+        }
+        self.message_queue = [NSMutableArray array]; // clear the message queue, as we have now send everything
     }
 }
 
@@ -63,21 +73,17 @@
     // data here is an array of WebSocketRails messages (or events)
     id messageData = [message isKindOfClass:[NSData class]] ? message : [message dataUsingEncoding:NSUTF8StringEncoding];
     id data = [NSJSONSerialization JSONObjectWithData:messageData options:NSJSONReadingMutableContainers error:nil];
-    [_dispatcher newMessage:data];
+    [_delegate connection:self didReceiveMessages:data];
 }
 
 - (void)webSocket:(SRWebSocket *)webSocket didCloseWithCode:(NSInteger)code reason:(NSString *)reason wasClean:(BOOL)wasClean
 {
-    WebSocketRailsEvent *closeEvent = [WebSocketRailsEvent.alloc initWithData:@[WSRSpecialEventNames.ConnectionClosed, @{}]];
-    _dispatcher.state = WSRDispatcherStateDisconnected;
-    [_dispatcher dispatch:closeEvent];
+    [self.delegate connection:self didCloseWithCode:code reason:reason wasClean:wasClean];
 }
 
 - (void)webSocket:(SRWebSocket *)webSocket didFailWithError:(NSError *)error
 {
-    WebSocketRailsEvent *closeEvent = [WebSocketRailsEvent.alloc initWithData:@[WSRSpecialEventNames.ConnectionError, @{}]];
-    _dispatcher.state = WSRDispatcherStateDisconnected;
-    [_dispatcher dispatch:closeEvent];
+    [self.delegate connection:self didFailWithError:error];
 }
 
 @end

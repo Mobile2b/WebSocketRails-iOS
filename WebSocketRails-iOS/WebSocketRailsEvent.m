@@ -9,8 +9,6 @@
 #import "WebSocketRailsEvent.h"
 
 const struct WSRSpecialEventNames WSRSpecialEventNames = {
-    .ConnectionClosed = @"connection_closed",
-    .ConnectionError = @"connection_error",
     .ClientConnected = @"client_connected",
     .WebSocketRailsPong = @"websocket_rails.pong",
     .WebSocketRailsPing = @"websocket_rails.ping",

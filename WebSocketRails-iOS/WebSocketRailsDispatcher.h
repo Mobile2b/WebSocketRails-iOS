@@ -14,24 +14,30 @@
 #import "WebSocketRailsTypes.h"
 
 @class WebSocketRailsChannel;
+@class WebSocketRailsDispatcher;
 
-typedef NS_ENUM(NSUInteger, WSRDispatcherState) {
-    WSRDispatcherStateConnected,
-    WSRDispatcherStateConnecting,
-    WSRDispatcherStateDisconnected
-};
+@protocol WebSocketRailsDispatcherDelegate <NSObject>
+
+@optional
+
+- (void)dispatcherDidEstablishConnection:(WebSocketRailsDispatcher *)dispatcher;
+- (void)dispatcher:(WebSocketRailsDispatcher *)dispatcher connectionDidFailWithError:(NSError *)error;
+- (void)dispatcher:(WebSocketRailsDispatcher *)dispatcher connectionDidCloseWithCode:(NSInteger)code reason:(NSString *)reason wasClean:(BOOL)wasClean;
+
+@end
+
+
 
 @interface WebSocketRailsDispatcher : NSObject
 
-@property (assign) WSRDispatcherState state;
 @property (nonatomic, strong) NSURL *url;
 @property (nonatomic, strong) NSMutableDictionary *channels;
 @property (nonatomic, strong) NSNumber *connectionId;
+@property (weak) id<WebSocketRailsDispatcherDelegate> delegate;
 
 - (id)initWithUrl:(NSURL *)url;
 
 - (void)dispatch:(WebSocketRailsEvent *)event;
-- (void)newMessage:(NSArray *)data;
 
 /**
  *  Use this method to add a callback for the specified event name. The callback will be called every time an event with this name occurs, which is not a channel-specific event.
