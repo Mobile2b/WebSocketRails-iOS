@@ -14,7 +14,6 @@
 		9336675F186117F9006BD134 /* WebSocketRailsEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 9336675A186117F9006BD134 /* WebSocketRailsEvent.m */; };
 		933667611861182C006BD134 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 933667601861182C006BD134 /* CFNetwork.framework */; };
 		9336676318611831006BD134 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9336676218611831006BD134 /* Security.framework */; };
-		9336676518611840006BD134 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9336676418611840006BD134 /* libicucore.dylib */; };
 		D9C450906418425BA8A99D23 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 628DA8DA78694B9BAB8496B2 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -48,7 +47,6 @@
 		9336675B186117F9006BD134 /* WebSocketRailsTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebSocketRailsTypes.h; sourceTree = "<group>"; };
 		933667601861182C006BD134 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		9336676218611831006BD134 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		9336676418611840006BD134 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
 		933667821861200A006BD134 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		B931FC8DB3F04A1082060B8E /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -58,7 +56,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9336676518611840006BD134 /* libicucore.dylib in Frameworks */,
 				9336676318611831006BD134 /* Security.framework in Frameworks */,
 				933667611861182C006BD134 /* CFNetwork.framework in Frameworks */,
 				933666B618610E5F006BD134 /* Foundation.framework in Frameworks */,
@@ -91,7 +88,6 @@
 		933666B418610E5F006BD134 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				9336676418611840006BD134 /* libicucore.dylib */,
 				9336676218611831006BD134 /* Security.framework */,
 				933667601861182C006BD134 /* CFNetwork.framework */,
 				933666B518610E5F006BD134 /* Foundation.framework */,
@@ -301,6 +297,13 @@
 				DSTROOT = /tmp/WebSocketRails_iOS.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-framework",
+					CFNetwork,
+					"-framework",
+					Security,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -313,6 +316,13 @@
 				DSTROOT = /tmp/WebSocketRails_iOS.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-framework",
+					CFNetwork,
+					"-framework",
+					Security,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
