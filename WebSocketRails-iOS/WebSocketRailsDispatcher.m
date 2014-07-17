@@ -13,7 +13,7 @@
 
 NSString *const WSRConnectionIDMessageKey = @"connectionId";
 
-@interface WebSocketRailsDispatcher() <WebSocketRailsConnectionDelegate>
+@interface WebSocketRailsDispatcher() <WebSocketRailsConnectionDelegate, WebSocketRailsChannelEventSender>
 
 @property (nonatomic, strong) NSMutableDictionary *queue;
 @property (nonatomic, strong) NSMutableDictionary *callbacks;
@@ -137,7 +137,7 @@ NSString *const WSRConnectionIDMessageKey = @"connectionId";
     if (_channels[channelName])
         return _channels[channelName];
     
-    WebSocketRailsChannel *channel = [WebSocketRailsChannel.alloc initWithName:channelName dispatcher:self private:NO];
+    WebSocketRailsChannel *channel = [WebSocketRailsChannel.alloc initWithName:channelName eventSender:self private:NO];
     _channels[channelName] = channel;
     return channel;
 }
