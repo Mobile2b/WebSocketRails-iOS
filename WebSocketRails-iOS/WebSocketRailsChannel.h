@@ -9,17 +9,22 @@
 #pragma once
 
 #import <Foundation/Foundation.h>
-#import "WebSocketRailsEvent.h"
-#import "WebSocketRailsDispatcher.h"
 #import "WebSocketRailsTypes.h"
 
-@class WebSocketRailsDispatcher;
+@class WebSocketRailsEvent;
+
+@protocol WebSocketRailsChannelEventSender <NSObject>
+
+- (void)triggerEvent:(WebSocketRailsEvent *)event;
+
+@end
+
 
 @interface WebSocketRailsChannel : NSObject
 
 @property (nonatomic, assign) BOOL isPrivate;
 
-- (id)initWithName:(NSString *)name dispatcher:(WebSocketRailsDispatcher *)dispatcher private:(BOOL)private;
+- (id)initWithName:(NSString *)name eventSender:(id<WebSocketRailsChannelEventSender>)eventSender private:(BOOL)private;
 
 /**
  *  Use this method to add a callback for the specified event name. The callback will be called every time an event with this name occurs in this channel.

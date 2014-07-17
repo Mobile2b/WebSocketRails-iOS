@@ -42,12 +42,11 @@
 /**
  *  Use this method to add a callback for the specified event name. The callback will be called every time an event with this name occurs, which is not a channel-specific event.
  *
- *  @param eventName the name of the event for which the callback should be registered. See WSRSpecialEventNames for some special connection-related cases.
+ *  @param eventName the name of the event for which the callback should be registered.
  *  @param callback  the callback to call whenever such an event occurs
- *
- *  @discussion You can also use this to register a callback e.g. for a connection-close event (WSRSpecialEventNames.ConnectionClosed)
  */
 - (void)bindToEventWithName:(NSString *)eventName callback:(EventCompletionBlock)callback;
+
 - (void)trigger:(NSString *)eventName data:(id)data success:(EventCompletionBlock)success failure:(EventCompletionBlock)failure;
 - (void)triggerEvent:(WebSocketRailsEvent *)event;
 

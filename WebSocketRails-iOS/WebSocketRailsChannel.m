@@ -7,6 +7,7 @@
 //
 
 #import "WebSocketRailsChannel.h"
+#import "WebSocketRailsEvent.h"
 
 NSString *const WSRChannelSubscriptionMessageDataChannelKey = @"channel";
 
@@ -15,20 +16,20 @@ NSString *const WSRChannelSubscriptionMessageDataChannelKey = @"channel";
 @property (nonatomic, strong) NSString *eventName;
 @property (nonatomic, strong) NSMutableDictionary *callbacks;
 @property (nonatomic, strong) NSString *channelName;
-@property (nonatomic, strong) WebSocketRailsDispatcher *dispatcher;
+@property (weak, readonly) id<WebSocketRailsChannelEventSender> eventSender;
 @property (readonly, getter = isPrivate) BOOL private;
 
 @end
 
 @implementation WebSocketRailsChannel
 
-- (id)initWithName:(NSString *)channelName dispatcher:(WebSocketRailsDispatcher *)dispatcher private:(BOOL)private
+- (id)initWithName:(NSString *)channelName eventSender:(id<WebSocketRailsChannelEventSender>)eventSender private:(BOOL)private
 {
     self = [super init];
-    if (self) {
-        
+    if (self)
+    {
         _channelName = channelName;
-        _dispatcher = dispatcher;
+        _eventSender = eventSender;
         _private = private;
         
         // Mutable disctionary of mutable arrays
@@ -55,7 +56,7 @@ NSString *const WSRChannelSubscriptionMessageDataChannelKey = @"channel";
                                                                            ]
                                                                  success:nil failure:nil];
     
-    [self.dispatcher triggerEvent:event];
+    [self.eventSender triggerEvent:event];
 }
 
 - (void)bindToEventWithName:(NSString *)eventName callback:(EventCompletionBlock)callback;
@@ -76,7 +77,7 @@ NSString *const WSRChannelSubscriptionMessageDataChannelKey = @"channel";
                                                                            ]
                                                                  success:nil
                                                                  failure:nil];
-    [_dispatcher triggerEvent:event];
+    [self.eventSender triggerEvent:event];
 }
 
 - (void)dispatch:(NSString *)eventName message:(id)message
@@ -101,7 +102,7 @@ NSString *const WSRChannelSubscriptionMessageDataChannelKey = @"channel";
                                                                            ]
                                   ];
     
-    [_dispatcher triggerEvent:event];
+    [self.eventSender triggerEvent:event];
     [_callbacks removeAllObjects];
 }
 
