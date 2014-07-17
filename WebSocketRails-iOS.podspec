@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "WebSocketRails-iOS"
-  s.version          = "0.2"
+  s.version          = "0.3"
   s.summary          = "Port of JavaScript client provided by https://github.com/websocket-rails/websocket-rails"
   s.homepage         = "https://github.com/Mobile2b/WebSocketRails-iOS"
   s.license          = 'MIT'
