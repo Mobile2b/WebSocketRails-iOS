@@ -8,6 +8,8 @@
 
 #import "WebSocketRailsDispatcher.h"
 #import "WebSocketRailsConnection.h"
+#import "WebSocketRailsEvent.h"
+#import "WebSocketRailsChannel.h"
 
 NSString *const WSRConnectionIDMessageKey = @"connectionId";
 
@@ -16,6 +18,7 @@ NSString *const WSRConnectionIDMessageKey = @"connectionId";
 @property (nonatomic, strong) NSMutableDictionary *queue;
 @property (nonatomic, strong) NSMutableDictionary *callbacks;
 @property (nonatomic, strong) WebSocketRailsConnection *connection;
+@property (nonatomic, strong) NSMutableDictionary *channels;
 @property (readwrite, assign) WSRDispatcherState state;
 
 @end
@@ -29,13 +32,11 @@ NSString *const WSRConnectionIDMessageKey = @"connectionId";
     self = [super init];
     if (self) {
         _url = url;
-        _state = WSRDispatcherStateConnecting;
         _channels = [NSMutableDictionary dictionary];
         _queue = [NSMutableDictionary dictionary];
         _callbacks = [NSMutableDictionary dictionary];
         
-        _connection = [WebSocketRailsConnection.alloc initWithUrl:url delegate:self];
-        _connectionId = @0;
+        [self connect];
     }
     return self;
 }
@@ -44,6 +45,11 @@ NSString *const WSRConnectionIDMessageKey = @"connectionId";
 
 - (void)connection:(WebSocketRailsConnection *)connection didReceiveMessages:(NSDictionary *)messages
 {
+    if (connection != self.connection)
+    {
+        // ignore
+        return;
+    }
     for (id socket_message in messages)
     {
         WebSocketRailsEvent *event = [WebSocketRailsEvent.alloc initWithData:socket_message];
@@ -72,6 +78,11 @@ NSString *const WSRConnectionIDMessageKey = @"connectionId";
 
 - (void)connection:(WebSocketRailsConnection *)connection didFailWithError:(NSError *)error
 {
+    if (connection != self.connection)
+    {
+        // ignore
+        return;
+    }
     self.state = WSRDispatcherStateDisconnected;
     if ([self.delegate respondsToSelector:@selector(dispatcher:connectionDidFailWithError:)])
     {
@@ -81,6 +92,11 @@ NSString *const WSRConnectionIDMessageKey = @"connectionId";
 
 - (void)connection:(WebSocketRailsConnection *)connection didCloseWithCode:(NSInteger)code reason:(NSString *)reason wasClean:(BOOL)wasClean
 {
+    if (connection != self.connection)
+    {
+        // ignore
+        return;
+    }
     self.state = WSRDispatcherStateDisconnected;
     if ([self.delegate respondsToSelector:@selector(dispatcher:connectionDidCloseWithCode:reason:wasClean:)])
     {
@@ -93,19 +109,19 @@ NSString *const WSRConnectionIDMessageKey = @"connectionId";
     // We ignore this case as we are more interested in the 'ClientConnected' message and use that as a confirmation for a successful message. See -connection:didReceiveMessages: and -connectionEstablished:
 }
 
-#pragma mark - Main
+#pragma mark - Public
 
-- (void)connectionEstablished:(id)data
+- (void)reconnect
 {
-    _state = WSRDispatcherStateConnected;
-    _connectionId = data[WSRConnectionIDMessageKey] ?: [NSNull null];
+    NSParameterAssert(self.state == WSRDispatcherStateDisconnected);
+    [self connect];
     
-    if ([self.delegate respondsToSelector:@selector(dispatcherDidEstablishConnection:)])
+    // although no connection is established yet, we can already ask our channels to send their subscription messages again
+    // the connection will just enqueue them and we flush the queue, once the connection is established
+    for (NSString *channelName in self.channels)
     {
-        [self.delegate dispatcherDidEstablishConnection:self];
+        [self.channels[channelName] resubscribe];
     }
-    
-    [_connection flushQueue:_connectionId];
 }
 
 - (void)bindToEventWithName:(NSString *)eventName callback:(EventCompletionBlock)callback
@@ -116,11 +132,51 @@ NSString *const WSRConnectionIDMessageKey = @"connectionId";
     [_callbacks[eventName] addObject:[callback copy]];
 }
 
+- (WebSocketRailsChannel *)subscribeToChannelWithName:(NSString *)channelName
+{
+    if (_channels[channelName])
+        return _channels[channelName];
+    
+    WebSocketRailsChannel *channel = [WebSocketRailsChannel.alloc initWithName:channelName dispatcher:self private:NO];
+    _channels[channelName] = channel;
+    return channel;
+}
+
+- (void)unsubscribeFromChannelWithName:(NSString *)channelName
+{
+    if (!_channels[channelName])
+        return;
+    
+    [_channels[channelName] destroy];
+    [_channels removeObjectForKey:channelName];
+}
+
+#pragma mark - Private
+
+- (void)connect
+{
+    self.state = WSRDispatcherStateConnecting;
+    self.connection = [WebSocketRailsConnection.alloc initWithUrl:self.url delegate:self];
+}
+
+- (void)connectionEstablished:(id)data
+{
+    _state = WSRDispatcherStateConnected;
+    self.connection.connectionId = data[WSRConnectionIDMessageKey] ?: [NSNull null];
+    
+    if ([self.delegate respondsToSelector:@selector(dispatcherDidEstablishConnection:)])
+    {
+        [self.delegate dispatcherDidEstablishConnection:self];
+    }
+    
+    [self.connection flushQueue];
+}
+
 - (void)trigger:(NSString *)eventName data:(id)data success:(EventCompletionBlock)success failure:(EventCompletionBlock)failure
 {
-    WebSocketRailsEvent *event = [WebSocketRailsEvent.alloc initWithData:@[eventName, data, _connectionId] success:success failure:failure];
+    WebSocketRailsEvent *event = [WebSocketRailsEvent.alloc initWithData:@[eventName, data] success:success failure:failure];
     _queue[event.id] = event;
-    [_connection trigger:event];
+    [self.connection trigger:event];
 }
  
  - (void)triggerEvent:(WebSocketRailsEvent *)event
@@ -143,25 +199,6 @@ NSString *const WSRConnectionIDMessageKey = @"connectionId";
     }
 }
 
-- (WebSocketRailsChannel *)subscribeToChannelWithName:(NSString *)channelName
-{
-    if (_channels[channelName])
-        return _channels[channelName];
-    
-    WebSocketRailsChannel *channel = [WebSocketRailsChannel.alloc initWithName:channelName dispatcher:self private:NO];
-    _channels[channelName] = channel;
-    return channel;
-}
-
-- (void)unsubscribeFromChannelWithName:(NSString *)channelName
-{
-    if (!_channels[channelName])
-        return;
-    
-    [_channels[channelName] destroy];
-    [_channels removeObjectForKey:channelName];
-}
-
 - (void)dispatchChannel:(WebSocketRailsEvent *)event
 {
     if (!_channels[event.channel])
@@ -172,12 +209,13 @@ NSString *const WSRConnectionIDMessageKey = @"connectionId";
 
 - (void)pong
 {
-    WebSocketRailsEvent *pong = [WebSocketRailsEvent.alloc initWithData:@[WSRSpecialEventNames.WebSocketRailsPong, @{}, _connectionId ? _connectionId : [NSNull null]]];
+    WebSocketRailsEvent *pong = [WebSocketRailsEvent.alloc initWithData:@[WSRSpecialEventNames.WebSocketRailsPong, @{}]];
     [_connection trigger:pong];
 }
 
 - (void)disconnect
 {
+    self.state = WSRDispatcherStateDisconnected;
     [_connection disconnect];
 }
 

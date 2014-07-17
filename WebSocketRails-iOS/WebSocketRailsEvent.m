@@ -95,7 +95,7 @@ const struct WSREventAttributeKeys WSREventAttributeKeys = {
     NSArray *array =
             @[_name,
              [self attributes]
-              ];
+              ]; // TODO: shouldn't the connection_id be serialized as well? But it's not done in the JavaScript client either: https://github.com/websocket-rails/websocket-rails/blob/master/lib/assets/javascripts/websocket_rails/event.js.coffee
     
     return [NSString.alloc initWithData:[NSJSONSerialization dataWithJSONObject:array options:NSJSONWritingPrettyPrinted error:nil] encoding:NSUTF8StringEncoding];
 }

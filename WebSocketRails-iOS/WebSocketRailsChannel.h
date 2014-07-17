@@ -34,4 +34,9 @@
 
 - (void)trigger:(NSString *)eventName message:(id)message;
 
+/**
+ *  Will send a new subscription message to the server to resubscribe.
+ */
+- (void)resubscribe;
+
 @end

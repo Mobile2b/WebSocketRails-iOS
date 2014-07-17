@@ -16,6 +16,7 @@ NSString *const WSRChannelSubscriptionMessageDataChannelKey = @"channel";
 @property (nonatomic, strong) NSMutableDictionary *callbacks;
 @property (nonatomic, strong) NSString *channelName;
 @property (nonatomic, strong) WebSocketRailsDispatcher *dispatcher;
+@property (readonly, getter = isPrivate) BOOL private;
 
 @end
 
@@ -25,29 +26,36 @@ NSString *const WSRChannelSubscriptionMessageDataChannelKey = @"channel";
 {
     self = [super init];
     if (self) {
-        NSString *eventName = nil;
-        if (private)
-            eventName = WSRSpecialEventNames.WebSocketRailsSubscribePrivate;
-        else
-            eventName = WSRSpecialEventNames.WebSocketRailsSubscribe;
         
         _channelName = channelName;
         _dispatcher = dispatcher;
-        
-        WebSocketRailsEvent *event = [WebSocketRailsEvent.alloc initWithData:
-                                      @[eventName,
-                                        @{WSREventAttributeKeys.data:
-                                              @{WSRChannelSubscriptionMessageDataChannelKey : _channelName}
-                                          },
-                                        _dispatcher.connectionId ? _dispatcher.connectionId : [NSNull null]]
-                                                                     success:nil failure:nil];
-        
-        [dispatcher triggerEvent:event];
+        _private = private;
         
         // Mutable disctionary of mutable arrays
         _callbacks = [NSMutableDictionary dictionary];
+        
+        [self sendSubscriptionEvent];
     }
     return self;
+}
+
+- (void)resubscribe
+{
+    [self sendSubscriptionEvent];
+}
+
+- (void)sendSubscriptionEvent
+{
+    NSString *eventName = [self isPrivate] ? WSRSpecialEventNames.WebSocketRailsSubscribePrivate : WSRSpecialEventNames.WebSocketRailsSubscribe;
+    WebSocketRailsEvent *event = [WebSocketRailsEvent.alloc initWithData:@[
+                                                                           eventName,
+                                                                           @{WSREventAttributeKeys.data:
+                                                                                 @{WSRChannelSubscriptionMessageDataChannelKey : _channelName}
+                                                                             }
+                                                                           ]
+                                                                 success:nil failure:nil];
+    
+    [self.dispatcher triggerEvent:event];
 }
 
 - (void)bindToEventWithName:(NSString *)eventName callback:(EventCompletionBlock)callback;
@@ -60,12 +68,14 @@ NSString *const WSRChannelSubscriptionMessageDataChannelKey = @"channel";
 
 - (void)trigger:(NSString *)eventName message:(id)message
 {
-    WebSocketRailsEvent *event = [WebSocketRailsEvent.alloc initWithData:
-                                  @[eventName,
-                                    @{WSREventAttributeKeys.channel: _channelName,
-                                      WSREventAttributeKeys.data: message},
-                                    _dispatcher.connectionId]
-                                                                 success:nil failure:nil];
+    WebSocketRailsEvent *event = [WebSocketRailsEvent.alloc initWithData:@[
+                                                                           eventName,
+                                                                           @{WSREventAttributeKeys.channel: _channelName,
+                                                                             WSREventAttributeKeys.data: message
+                                                                             }
+                                                                           ]
+                                                                 success:nil
+                                                                 failure:nil];
     [_dispatcher triggerEvent:event];
 }
 
@@ -83,12 +93,13 @@ NSString *const WSRChannelSubscriptionMessageDataChannelKey = @"channel";
 - (void)destroy
 {
     NSString *eventName = WSRSpecialEventNames.WebSocketRailsUnscubscribe;
-    WebSocketRailsEvent *event = [WebSocketRailsEvent.alloc initWithData:
-                                  @[eventName,
-                                    @{WSREventAttributeKeys.data:
-                                          @{WSRChannelSubscriptionMessageDataChannelKey : _channelName}
-                                      },
-                                    _dispatcher.connectionId]];
+    WebSocketRailsEvent *event = [WebSocketRailsEvent.alloc initWithData:@[
+                                                                           eventName,
+                                                                           @{WSREventAttributeKeys.data:
+                                                                                 @{WSRChannelSubscriptionMessageDataChannelKey : _channelName}
+                                                                             }
+                                                                           ]
+                                  ];
     
     [_dispatcher triggerEvent:event];
     [_callbacks removeAllObjects];

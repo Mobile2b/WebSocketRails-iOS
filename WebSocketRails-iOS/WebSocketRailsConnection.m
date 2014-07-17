@@ -30,6 +30,7 @@
         _webSocket = [SRWebSocket.alloc initWithURL:_url];
         _webSocket.delegate = self;
         [_webSocket open];
+        self.connectionId = @0;
     }
     return self;
 }
@@ -45,21 +46,27 @@
     }
     else
     {
-        [_webSocket send:[event serialize]];
+        [self sendEvent:event];
     }
 }
 
-- (void)flushQueue:(NSNumber *)id
+- (void)flushQueue
 {
     @synchronized(self)
     {
         for (WebSocketRailsEvent *event in _message_queue)
         {
-            NSString *serializedEvent = [event serialize];
-            [_webSocket send:serializedEvent];
+            [self sendEvent:event];
         }
         self.message_queue = [NSMutableArray array]; // clear the message queue, as we have now send everything
     }
+}
+
+- (void)sendEvent:(WebSocketRailsEvent *)eventToSend
+{
+    NSParameterAssert(self.delegate.state == WSRDispatcherStateConnected);
+    eventToSend.connectionId = self.connectionId; // set the connection id of the event, as the creator of the event could not have known it or the event was created before the connection had an id.
+    [_webSocket send:[eventToSend serialize]];
 }
 
 - (void)disconnect
@@ -68,6 +75,7 @@
 }
 
 #pragma mark - SRWebSocketDelegate
+
 - (void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(id)message
 {
     // data here is an array of WebSocketRails messages (or events)

@@ -34,11 +34,21 @@ typedef NS_ENUM(NSUInteger, WSRDispatcherState) {
 @interface WebSocketRailsConnection : NSObject
 
 @property (weak) id<WebSocketRailsConnectionDelegate> delegate;
+@property (nonatomic, strong) NSNumber *connectionId;
 
 - (id)initWithUrl:(NSURL *)url delegate:(id<WebSocketRailsConnectionDelegate>)delegate;
 
+/**
+ *  Sends a message for the specified event (with the connection id of this connection) or enqueues the message to be send later if the connection is not (yet) connected.
+ *
+ *  @param event the event to send. This will be serialized and the connection-id will be added before sending it.
+ */
 - (void)trigger:(WebSocketRailsEvent *)event;
-- (void)flushQueue:(NSNumber *)id;
+
+/**
+ *  Sends all the enqueued messages (the connection id of the connection at the moment this method is called will be used to send the messages)
+ */
+- (void)flushQueue;
 
 - (void)disconnect;
 
